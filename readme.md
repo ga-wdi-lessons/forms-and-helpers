@@ -154,3 +154,5 @@ module OrdinalizeHelper
   end
 end
 ```
+
+And a couple of helpers being used in garnet! https://github.com/ga-dc/garnet/blob/master/app/helpers/application_helper.rb
