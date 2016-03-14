@@ -2,7 +2,11 @@
 
 ## Learning Objectives
 
+- Indentify 3 ways to make HTTP requests using HTML
 - Use HTML form elements to get user input
+- Read form values using JavaScript
+- Use authenticity token to prevent CSRF attacks
+- Use strong params to prevent mass assignment attack
 
 ## You do: Local Setup
 
