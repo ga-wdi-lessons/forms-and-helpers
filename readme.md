@@ -128,7 +128,7 @@ HTML generation.
 
 ## We do:
 
-Convert search form to use `form_for`
+Convert create form to use `form_for`
 
 ## You do:
 
