@@ -40,37 +40,39 @@ An example form:
 </form>
 ```
 
-##  We do: Build a search form
+##  I do: Build a search form
 
 ## You do: Doc dive
 
 Count off 1-6
 
-1. option and select
-1. textarea and input type="hidden"
-1. input type="text" and type="number" and type="password"
-1. input type="checkbox"
-1. input type="radio"
-1. input type="date"
+1. [option](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) and [select](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)
+1. [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) and [input type="hidden"](http://www.echoecho.com/htmlforms07.htm)
+1. [input type="text" and type="number" and type="password"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+1. [input type="checkbox"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+1. [input type="radio"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+1. [input type="date"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
 
-Answer the following questions:
+Create a simple HTML demo (no ruby in this one!) and answer the following questions:
 
 1. When would you use this?
 1. Any related attributes?
-1. How do you get the value using javascript
-1. submit a pull request to solution branch
+1. How do you get the value of the form field using javascript?
+1. Slack your code!
 
 ## You do: Teach Back
+
+## Break
 
 ## I do: form POST
 
 ### Authenticity Token
 
 ```html
-<form action="/forms" method="post">
+<form action="/cats" method="post">
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-  <input name="name" type="text" placeholder="name">
-  <input name="url" type="text" placeholder="url">
+  <input name="kind" type="text" placeholder="kind">
+  <input name="image_url" type="text" placeholder="image url">
   <button type="submit">Submit</button>
 </form>
 ```
@@ -80,10 +82,10 @@ The authenticity token prevents our applications from being vulnerable to [CSRF 
 ### params hash
 
 ```rb
-# app/controllers/forms_controller.rb
+# app/controllers/cats_controller.rb
 
-def post
-  Language.create(name: params[:name], url: params[:url])
+def create
+  Cat.create(kind: params[:kind], image_url: params[:image_url])
   redirect_to :back
 end
 ```
@@ -93,21 +95,18 @@ end
 `strong_params` prevents [mass assignment](https://en.wikipedia.org/wiki/Mass_assignment_vulnerability)
 
 ```rb
-# app/controllers/forms_controller.rb
+# app/controllers/cats_controller.rb
 
-def post
-  Language.create(name: params[:name], url: params[:url])
+def create
+  Cat.create(cat_params)
   redirect_to :back
 end
+
+private
+def cat_params
+  params.require(:cat).permit(:kind, :image_url)
+end
 ```
-
-## You do:
-
-add 1 to your previous group number.
-
-Submit the form to update db
-
-## Break
 
 ## Intro to helpers
 
@@ -132,9 +131,25 @@ Convert create form to use `form_for`
 
 ## You do:
 
-Add 1 to your previous group number
+add 1 to your previous group number.
 
-convert HTML to use helper. when the page loads, show the saved value
+Convert HTML to use helper. - http://guides.rubyonrails.org/form_helpers.html
+
+If you're creating a generic form, you can use `form_tag`, e.g.:
+
+```erb
+<%= form_tag do %>
+  <!-- http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form -->
+<% end %>
+```
+
+- Slack your code!
+
+### Bonus
+
+- Create a migration for `Cat` to handle your new input
+- Submit the form to update db.
+- When the page loads, show the saved value.
 
 ## Custom Rails helpers
 
